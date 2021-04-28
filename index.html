@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="math.js"></script>
   </head>
   <body>
     <div id="topnav">
@@ -24,10 +25,6 @@
       </label>
     </nav>
    </div>
-    <p>
-      Simulation of a virus, which is spreading southward (maybe due to wind or
-      something)
-    </p>
 
     <div>
       <canvas id="canvas" width="4000" height="4000"> </canvas>
@@ -42,6 +39,7 @@
           y: evt.clientY - rect.top,
         };
       }
+      let info = document.getElementById("INFO");
       canvas.addEventListener(
         "mousemove",
         function (evt) {
@@ -62,12 +60,6 @@
               ) {
                 // console.log(PlantsArray[i]);
                 var message =
-                  //"Mouse position: " +
-                 // mousePos.x +
-                 // " | " +
-                 // mousePos.y +
-                 // "<br>" +
-                  "" +
                   PlantsArray[i].id +
                   " is alive: " +
                   PlantsArray[i].alive +
@@ -87,15 +79,11 @@
       );
     </script>
     <script>
-      let info = document.getElementById("INFO");
-    </script>
-    <script>
       // parameters
       let _scale = 1; // canvas scale, useful for zoom
       let _speed = 50; // tick interval speed
 
       // panning vars
-      
       // panning
       let isDragging = false;
       let startX = 0;
@@ -175,18 +163,7 @@
         context.fill();
       }
 
-      // math functions
 
-      // pythagoras
-      function calculateDistance(x1, y1, x2, y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-      }
-
-      // random Number function
-      function randomNumber(start, end) {
-        // both including;
-        return Math.floor(Math.random() * end) + start;
-      }
 
       // plant modelling
       var PlantsArray = [];
