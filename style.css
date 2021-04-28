@@ -1,0 +1,48 @@
+body {
+  font-size: 1em;
+  background: black;
+}
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+}
+#INFO {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-100%, -100%);
+  width: 20rem;
+  height: 10rem;
+  background: white;
+  border: 1px solid silver;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+button {
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+}
+#canvas {
+  width: 100%;
+  background: white;
+}
+.topnav1,
+.topnav2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: silver;
+  padding: 0 1rem;
+  height: 4rem;
+}
+#topnav {
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+label {
+  display: flex;
+  flex-direction: column;
+}
