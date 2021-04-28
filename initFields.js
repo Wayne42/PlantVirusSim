@@ -1,5 +1,3 @@
-
-
 var ln = [];
 
 function initLines(mode = "rectangle") {
@@ -60,7 +58,6 @@ function initField(lines, plantsize = 40) {
                         //end of line
                     }
 
-                    //console.log(pd + " " + d);
                     if (d < pd) {
                         shortest = d;
                         continue;
@@ -68,7 +65,6 @@ function initField(lines, plantsize = 40) {
 
                     plant.neighbors.n = previousLine[i];
                     PlantsArray[previousLine[i].id].neighbors.s = plant;
-                    //console.log(previousLine[i].id);
                     break;
                 }
             }

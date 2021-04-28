@@ -16,7 +16,6 @@ function throttle(t, u, a) {
     }
 }
 
-
 // scroll functions
 let Body = document.body;
 let lastScrollTop = 0;
@@ -34,13 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollFunc();
 });
 
-
 // draw functions
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
 function writeMessage(message, x, y) {
-    context.font = "18pt Calibri";
+    context.font = "15pt Verdana";
     context.fillStyle = "black";
     context.fillText(message, x, y);
 }
@@ -88,6 +86,8 @@ function getMousePos(canvas, evt) {
         y: evt.clientY - rect.top,
     };
 }
+
+// hover overlay
 let info = document.getElementById("INFO");
 canvas.addEventListener(
     "mousemove",
@@ -128,7 +128,7 @@ canvas.addEventListener(
 );
 
 
-// start and stop
+// start and stop functions
 let x;
 let running = false;
 let startstopbtn = document.getElementById("startstopbtn");
@@ -157,34 +157,34 @@ function startStop() {
 
 // parameter handling
 
-  // set scale
-  let zoominput = document.getElementById("zoom");
-  let zoomvaluedis = document.getElementById("zoomvalue")
-  function setScale(e = 1){
-    if(e != 1 && e.value){
-      _scale = e.value;
+// set scale
+let zoominput = document.getElementById("zoom");
+let zoomvaluedis = document.getElementById("zoomvalue")
+function setScale(e = 1) {
+    if (e != 1 && e.value) {
+        _scale = e.value;
     }
-    else{_scale = e;}
+    else { _scale = e; }
     zoominput.value = _scale;
     zoomvaluedis.innerHTML = _scale;
     render();
-  }
+}
 
-  // set speed
-  let speedinput = document.getElementById("speed");
-  let speedvaluedis = document.getElementById("speedvalue")
-  function setSpeed(e = 1){
-    if(e != 1 && e.value){
-      _speed = e.value;
+// set speed
+let speedinput = document.getElementById("speed");
+let speedvaluedis = document.getElementById("speedvalue")
+function setSpeed(e = 1) {
+    if (e != 1 && e.value) {
+        _speed = e.value;
     }
-    else{_scale = e;}
+    else { _scale = e; }
     speedinput.value = _speed;
     speedvaluedis.innerHTML = _speed;
-    if(running){
-      stopInterval();
-      startInterval();
+    if (running) {
+        stopInterval();
+        startInterval();
     }
-  }
+}
 
 
 // panning
@@ -203,45 +203,34 @@ reOffset();
 window.onscroll = function (e) { reOffset(); }
 window.onresize = function (e) { reOffset(); }
 
+
 canvas.addEventListener("mousedown", (e) => handleMouseDown(e));
 canvas.addEventListener("mouseup", (e) => handleMouseUp(e));
 canvas.addEventListener("mousemove", (e) => { handleMouseMove(e) });
 canvas.addEventListener("mouseout", (e) => handleMouseOut(e));
-
 function handleMouseDown(e) {
     e.preventDefault();
     e.stopPropagation();
 
     // calc the starting mouse X,Y for the drag
+
     startX = parseInt(e.clientX - offsetX);
     startY = parseInt(e.clientY - offsetY);
 
-    // set the isDragging flag
     isDragging = true;
 }
-
 function handleMouseUp(e) {
     e.preventDefault();
     e.stopPropagation();
-
-    // clear the isDragging flag
     isDragging = false;
 }
 function handleMouseOut(e) {
     e.preventDefault();
     e.stopPropagation();
-
-    // clear the isDragging flag
     isDragging = false;
 }
-
-
 function handleMouseMove(e) {
-
-    // only do this code if the mouse is being dragged
     if (!isDragging) { return; }
-
-    // tell the browser we're handling this event
     e.preventDefault();
     e.stopPropagation();
 
@@ -261,7 +250,7 @@ function handleMouseMove(e) {
     // accumulate the net panning done
     netPanningX += dx;
     netPanningY += dy;
-    //context.clearRect(0,0,canvas.width,canvas.height);
+
     render();
 }
 

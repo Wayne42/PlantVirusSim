@@ -50,21 +50,20 @@
         this.id = id++;
         this.XPos = x;
         this.YPos = y;
-        this.radius = radius;
+        this.radius = radius; // size of plant
 
         // our binary data
         this.waterstress = wi;
         this.virusinfection = vi;
         this.lightstress = li;
 
-        // wasserstand modelierung
-        this.wasserStand = 50;
-        this.wasserToleranz = 20; // plus minus so viel wasser ist ok für die pflanze und noch optimal
-        this.optimalerWasserstand = 75; // so viel wasser liebt die pflanze und wächst perfekt
+        // waterlevel
+        this.waterLevel = 50;
+        this.waterTolerance = 20; // +- this value is fine for the plants waterlevel
+        this.bestWaterLevel = 75; // perfect waterLevelValue for this plant
 
-        this.wasserStressZeit = 0;
-        // wenn eine Pflanze so lange wassergestresst ist, dann krepiert sie
-        this.wasserStressZeitMax = 100;
+        this.waterStressAmount = 0;
+        this.waterStressMax = 100; // lethal stress
 
         this.alive = true;
 
@@ -79,7 +78,6 @@
         };
 
         // neighbors
-
         this.neighbors = { n: null, e: null, s: null, w: null }; // north, east, south, west
 
         this.getNearestNeighbors = () => {};
@@ -102,7 +100,7 @@
           );
 
           // waterlevel
-          let wl = this.wasserStand / 100;
+          let wl = this.waterLevel / 100;
           drawRect(
             (this.XPos + this.radius / 2) + netPanningX,
             this.YPos + netPanningY,
@@ -113,7 +111,7 @@
           );
           writeMessage(this.id, this.XPos + netPanningX, this.YPos + netPanningY);
           writeMessage(
-            this.wasserStand,
+            this.waterLevel,
             (this.XPos + this.radius / 2) + netPanningX,
             this.YPos + 25 + netPanningY
           );
@@ -138,10 +136,10 @@
 
       let time = 1;
       function nextTick() {
-        // random regen oder so
+        // random rain
         let rain = 0;
         if (randomNumber(1, 80) === 7) {
-          rain = randomNumber(20, 100); // regenmenge
+          rain = randomNumber(20, 100); // rain amount
         }
 
         // events
@@ -161,31 +159,31 @@
             }
           }
 
-          // wasserstress
+          // waterstress
           if (PlantsArray[i].alive) {
-            PlantsArray[i].wasserStand -= 1;
+            PlantsArray[i].waterLevel -= 1;
           }
-          // random regen oder so
+          // random rain
           if (rain > 0) {
-            PlantsArray[i].wasserStand += rain;
+            PlantsArray[i].waterLevel += rain;
           }
           if (
-            PlantsArray[i].wasserStand >
-              PlantsArray[i].optimalerWasserstand +
-                PlantsArray[i].wasserToleranz ||
-            PlantsArray[i].wasserStand <
-              PlantsArray[i].optimalerWasserstand +
-                PlantsArray[i].wasserToleranz
+            PlantsArray[i].waterLevel >
+              PlantsArray[i].bestWaterLevel +
+                PlantsArray[i].waterTolerance ||
+            PlantsArray[i].waterLevel <
+              PlantsArray[i].bestWaterLevel +
+                PlantsArray[i].waterTolerance
           ) {
             PlantsArray[i].waterstress = true;
           } else {
             PlantsArray[i].waterstress = false;
           }
           if (PlantsArray[i].waterstress) {
-            PlantsArray[i].wasserStressZeit++;
+            PlantsArray[i].waterStressAmount++;
           }
           if (
-            PlantsArray[i].wasserStressZeit > PlantsArray[i].wasserStressZeitMax
+            PlantsArray[i].waterStressAmount > PlantsArray[i].waterStressMax
           ) {
             PlantsArray[i].alive = false;
           }
