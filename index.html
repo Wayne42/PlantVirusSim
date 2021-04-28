@@ -12,7 +12,18 @@
   <body>
     <div id="topnav">
     <nav class="topnav1">
-      Simulation
+      Generate Field
+      <div class="flex-row">
+      <label>
+          Number of rows
+          <input type="number" value="20">
+        </label>
+      <label>
+          Width of a row
+        <input type="number" value="27">
+      </label>
+      </div>
+      <button>Generate</button>
     </nav>
     <nav class="topnav2">
       <button id="startstopbtn" onclick="startStop()">Start</button>   
@@ -27,7 +38,7 @@
     </nav>
    </div>
 
-    <div>
+    <div style="width:100vw; height: calc(100vh - 8rem - 4px); overflow: hidden;">
       <canvas id="canvas" width="4000" height="4000"> </canvas>
     </div>
     <div id="INFO"></div>

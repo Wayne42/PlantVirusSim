@@ -1,6 +1,7 @@
 body {
-  font-size: 1em;
-  background: black;
+  font-size: 15px;
+  background: #00ee99;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 *,
 *:after,
@@ -21,8 +22,18 @@ body {
   pointer-events: none;
 }
 button {
-  padding: 0.5rem 2rem;
-  font-size: 1rem;
+  padding: 0 2rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  padding: 0 2rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #canvas {
   width: 100%;
@@ -33,7 +44,6 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: silver;
   padding: 0 1rem;
   height: 4rem;
 }
@@ -41,8 +51,23 @@ button {
   top: 0;
   left: 0;
   width: 100%;
+  background: linear-gradient(42deg, #99ee77, #00ee99);
+  box-shadow: 0 0 4.2rem inset rgba(255, 255, 255, 0.42);
+  border-bottom: 2px solid #144600;
+  color: green;
+  text-shadow: 1px 1px 1px white, -1px -1px 0px #99ee77;
+  font-weight: bold;
 }
 label {
   display: flex;
   flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.flex-row > * {
+  margin-right: 1rem;
 }
